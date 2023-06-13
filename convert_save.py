@@ -21,13 +21,12 @@ for file_name in os.listdir(folder_path):
         spectrogram = librosa.stft(audio)
         spectrogram_db = librosa.amplitude_to_db(abs(spectrogram))
 
-        # Plot the spectrogram
-        plt.figure()
-        librosa.display.specshow(spectrogram_db, sr=sr, x_axis='time', y_axis='log')
-        plt.colorbar(format='%+2.0f dB')
-        plt.title('Spectrogram')
+        # Plot the spectrogram without graph labels
+        plt.figure(figsize=(10, 4))
+        librosa.display.specshow(spectrogram_db, sr=sr, x_axis=None, y_axis=None)
+        plt.axis('off')
 
         # Save the spectrogram as an image
         save_path = os.path.join(save_folder, file_name.replace('.flac', '.png'))
-        plt.savefig(save_path)
+        plt.savefig(save_path, bbox_inches='tight', pad_inches=0)
         plt.close()
